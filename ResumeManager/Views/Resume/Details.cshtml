@@ -1,0 +1,96 @@
+﻿@model ResumeManager.Models.Applicant
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+<div class="col-11 mx-auto pt-0">
+    <div class="card">
+        <div class="card-header bg-primary text-uppercase text-white" style="height:45px;">
+            <h4>View Applicant</h4>
+        </div>
+    </div>
+    <form enctype="multipart/form-data" asp-action="Create">
+        <div class="row">
+            <div class="col-md-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control-plaintext" readonly />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Gender" class="control-label"></label>
+                    <input asp-for="Gender" class="form-control-plaintext" readonly />
+                   
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Age" class="control-label"></label>
+                    <input asp-for="Age" type="text" class="form-control-plaintext" readonly />
+                   
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Qualification" class="control-label"></label>
+                    <input asp-for="Qualification"  class="form-control-plaintext" readonly />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="TotalExperience" class="control-label"></label>
+                    <input asp-for="TotalExperience" type="text" class="form-control-plaintext" readonly />
+                </div>
+            </div>
+            <div class="col-md-6 btn-group">
+                <img src="~/image/@Model.PhotoUrl" width="125px" height="130px" class="img-fluid" />
+              
+            </div>
+            <table id="ExpTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Designation</th>
+                        <th>Years Worked</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Experinces.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input asp-for="@Model.Experinces[i].CompanyName" class="form-control-plaintext" readonly />
+                            </td>
+                            <td>
+                                <input asp-for="@Model.Experinces[i].Designation" class="form-control-plaintext" readonly />
+                            </td>
+                            <td>
+                                <input asp-for="@Model.Experinces[i].YearsWorkrd" type="text" class="form-control-plaintext" readonly />
+                               
+                            </td>
+                      
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <input type="hidden" id="hdnLastIndex" value="0" />
+
+            <div class="form-group">
+               
+                <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
